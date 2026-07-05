@@ -1,0 +1,152 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Terms of Service - CalcHub',
+  description: 'CalcHub terms of service. Read the terms and conditions for using our free online calculators.',
+};
+
+export default function TermsOfService() {
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-800">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
+        <a
+          href="/"
+          className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-emerald-600 transition-colors mb-8"
+        >
+          &larr; Back to CalcHub
+        </a>
+
+        <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-2">Terms of Service</h1>
+        <p className="text-slate-400 text-sm mb-10">Last updated: July 2025</p>
+
+        <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-8 text-slate-600 leading-relaxed">
+          <section>
+            <h2 className="text-xl font-semibold text-slate-800 mb-3">1. Acceptance of Terms</h2>
+            <p>
+              By accessing or using CalcHub (the &quot;Service&quot;), you agree to be bound by these
+              Terms of Service. If you do not agree, please do not use the Service. CalcHub
+              is a project by Osama.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-slate-800 mb-3">2. Description of Service</h2>
+            <p>
+              CalcHub provides free, browser-based calculators including but not limited to:
+              Loan EMI, Compound Interest, Salary Tax (Pakistan), Tip, Discount, Profit Margin,
+              BMI, Calorie, Body Fat, Ideal Weight, Due Date, Percentage, Age, Unit Converter,
+              GPA, Grade, Fuel Cost, Currency Converter, Time Zone Converter, and Password Generator.
+              All calculations occur entirely client-side in your browser.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-slate-800 mb-3">3. Free Usage</h2>
+            <p>
+              Free users may perform up to 15 calculations per day. This limit resets daily.
+              Free users see summary results for most calculators but do not have access to
+              detailed breakdowns such as monthly amortization schedules or year-by-year compound
+              interest tables. We reserve the right to modify these limits at any time.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-slate-800 mb-3">4. Premium Subscription</h2>
+            <p className="mb-2">Premium plans are available at two tiers:</p>
+            <ul className="list-disc pl-6 space-y-1 text-sm mb-3">
+              <li><strong>Monthly:</strong> $3/month, billed monthly, cancel anytime</li>
+              <li><strong>Lifetime:</strong> $49 one-time payment, permanent access</li>
+            </ul>
+            <p>
+              Premium benefits include unlimited daily calculations (no 15/day cap), detailed
+              breakdowns for financial and compound interest calculators, an ad-free experience,
+              and priority support. Payments are processed securely through LemonSqueezy.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-slate-800 mb-3">5. Accuracy Disclaimer</h2>
+            <p>
+              CalcHub calculators are provided for informational and educational purposes only.
+              While we strive for accuracy, we do not guarantee that results are error-free.
+              Financial, health, and tax calculations should not be used as the sole basis for
+              any financial, medical, or legal decisions. Always consult a qualified professional
+              for important decisions. Currency conversion rates are approximate and may differ
+              from real-time market rates.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-slate-800 mb-3">6. User Responsibilities</h2>
+            <ul className="list-disc pl-6 space-y-1 text-sm">
+              <li>You may not use the Service for any illegal purposes</li>
+              <li>You may not attempt to overload, hack, or disrupt the Service</li>
+              <li>You may not reverse-engineer or resell the Service</li>
+              <li>You acknowledge that calculation results are not professional advice</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-slate-800 mb-3">7. Intellectual Property</h2>
+            <p>
+              The CalcHub website, design, code, and branding are owned by Osama. You may not
+              copy, modify, or redistribute any part of the Service without explicit written
+              permission. Calculation results generated by the Service are yours to use freely.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-slate-800 mb-3">8. Disclaimer of Warranties</h2>
+            <p>
+              The Service is provided &quot;as is&quot; without warranties of any kind. We do not
+              guarantee that the Service will be error-free, uninterrupted, or meet your
+              specific requirements. Calculation accuracy may vary depending on input values
+              and rounding methods used.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-slate-800 mb-3">9. Limitation of Liability</h2>
+            <p>
+              In no event shall CalcHub or Osama be liable for any indirect, incidental, or
+              consequential damages arising from your use of the Service, including but not
+              limited to financial losses based on calculation results.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-slate-800 mb-3">10. Refund Policy</h2>
+            <p>
+              Monthly: Cancel anytime, no refunds after 48 hours. Lifetime: 30-day
+              money-back guarantee. Contact support@calchub.com to request a refund.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-slate-800 mb-3">11. Modifications</h2>
+            <p>
+              We reserve the right to modify these Terms at any time. Continued use after
+              changes constitutes acceptance.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-slate-800 mb-3">12. Contact</h2>
+            <p>
+              For questions about these Terms, contact us at:{' '}
+              <a href="mailto:support@calchub.com" className="text-emerald-600 hover:underline">
+                support@calchub.com
+              </a>
+            </p>
+          </section>
+        </div>
+
+        <div className="mt-12 pt-8 border-t border-slate-200 text-center">
+          <p className="text-xs text-slate-400">
+            &copy; {new Date().getFullYear()} CalcHub. <span className="brand-osama">A Project by Osama</span>. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
