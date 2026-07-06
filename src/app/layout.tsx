@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
@@ -52,21 +51,22 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7878398091851771"
           crossOrigin="anonymous"
         ></script>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-CMV34ZVLE7"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-CMV34ZVLE7');
+            `,
+          }}
+        ></script>
       </head>
       <body className={`${inter.variable} font-sans antialiased bg-slate-50 text-slate-900`}>
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-CMV34ZVLE7"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-CMV34ZVLE7');
-          `}
-        </Script>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

@@ -485,10 +485,9 @@ function calcCompoundInterest(v: Record<string, string | number>) {
   const P = num(v.principal);
   const rate = num(v.rate);
   const t = num(v.time);
-  const n = num(v.frequency);
+  const n = num(v.frequency) || 1; // Default to annually if select not touched
 
-  if (P <= 0 || rate <= 0 || t <= 0 || n <= 0) return "Please provide valid positive values.";
-
+  if (P <= 0 || rate <= 0 || t <= 0) return "Please provide valid positive values.";
   const r = rate / 100;
   const A = P * Math.pow(1 + r / n, n * t);
   const totalInterest = A - P;

@@ -14,6 +14,13 @@ export default function Header() {
     }
   };
 
+  const goToPricing = () => {
+    resetTool();
+    setTimeout(() => {
+      document.getElementById("pricing-section")?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  };
+
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-200/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -70,7 +77,10 @@ export default function Header() {
             >
               <span>📄</span> PDF Tools
             </a>
-            <button className="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-semibold rounded-full hover:shadow-lg hover:shadow-emerald-200 transition-all hover:-translate-y-0.5">
+            <button
+              onClick={goToPricing}
+              className="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-semibold rounded-full hover:shadow-lg hover:shadow-emerald-200 transition-all hover:-translate-y-0.5"
+            >
               ⭐ Go Premium
             </button>
 
@@ -110,6 +120,15 @@ export default function Header() {
             >
               📄 Visit ToolPDF — Free PDF Tools
             </a>
+            <button
+              onClick={() => {
+                setIsMenuOpen(false);
+                goToPricing();
+              }}
+              className="w-full py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-semibold rounded-xl"
+            >
+              ⭐ Go Premium
+            </button>
           </div>
         )}
       </div>
