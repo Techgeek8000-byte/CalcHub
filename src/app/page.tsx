@@ -1,5 +1,6 @@
 "use client";
 
+import CrossPromo from '@/components/CrossPromo';
 import { useCalcStore } from "@/lib/store";
 import Header from "@/components/calc/Header";
 import HeroSection from "@/components/calc/HeroSection";
@@ -36,7 +37,7 @@ export default function Home() {
           </div>
         )}
       </main>
-
+      <CrossPromo exclude="CalcHub" />
       <Footer />
     </div>
   );
