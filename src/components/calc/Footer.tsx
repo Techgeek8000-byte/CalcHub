@@ -1,3 +1,10 @@
+const promoSites = [
+  { name: 'ToolPDF', emoji: '📄', desc: 'Free PDF tools — merge, split, compress.', href: 'https://tool-pdf-six.vercel.app' },
+  { name: 'ConvertFlow', emoji: '🔄', desc: 'Free unit converters — length, weight, temp.', href: 'https://convert-flow-beta.vercel.app' },
+  { name: 'SEOKit', emoji: '🔍', desc: 'Free SEO tools — meta tags, SERP preview.', href: 'https://seo-kit-tau.vercel.app' },
+  { name: 'PixelForge AI', emoji: '🎨', desc: 'Free AI image generator — avatars, art.', href: 'https://pixelforge-ai-chi.vercel.app' },
+];
+
 export default function Footer() {
   return (
     <footer className="bg-white border-t border-slate-200 mt-16">
@@ -50,16 +57,18 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-slate-700 text-sm mb-3">More Tools</h4>
             <ul className="space-y-2 text-xs text-slate-500">
-              <li>
-                <a
-                  href="https://tool-pdf-six.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-emerald-600 transition-colors"
-                >
-                  📄 ToolPDF — PDF Tools
-                </a>
-              </li>
+              {promoSites.map(site => (
+                <li key={site.name}>
+                  <a
+                    href={site.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-emerald-600 transition-colors flex items-center gap-1.5"
+                  >
+                    <span>{site.emoji}</span> {site.name}
+                  </a>
+                </li>
+              ))}
               <li>
                 <a href="mailto:contact@calchub.com" className="hover:text-emerald-600 transition-colors">
                   ✉️ Contact Us

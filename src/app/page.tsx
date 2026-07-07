@@ -1,6 +1,5 @@
 "use client";
 
-import CrossPromo from '@/components/CrossPromo';
 import { useCalcStore } from "@/lib/store";
 import Header from "@/components/calc/Header";
 import HeroSection from "@/components/calc/HeroSection";
@@ -28,7 +27,7 @@ export default function Home() {
             </section>
             <AdBanner slot="mid-content" />
             <PricingSection />
-            <CrossPromo />
+            <CrossPromo exclude="CalcHub" />
             <AdBanner slot="pre-footer" />
           </>
         ) : (

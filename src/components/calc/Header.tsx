@@ -3,6 +3,13 @@
 import { useState } from "react";
 import { useCalcStore } from "@/lib/store";
 
+const promoSites = [
+  { name: 'ToolPDF', emoji: '📄', href: 'https://tool-pdf-six.vercel.app' },
+  { name: 'ConvertFlow', emoji: '🔄', href: 'https://convert-flow-beta.vercel.app' },
+  { name: 'SEOKit', emoji: '🔍', href: 'https://seo-kit-tau.vercel.app' },
+  { name: 'PixelForge AI', emoji: '🎨', href: 'https://pixelforge-ai-chi.vercel.app' },
+];
+
 export default function Header() {
   const { searchQuery, setSearchQuery, currentView, resetTool } = useCalcStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -69,14 +76,17 @@ export default function Header() {
 
           {/* Right Side */}
           <div className="flex items-center gap-3">
-            <a
-              href="https://tool-pdf-six.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-600 hover:text-emerald-600 bg-slate-100 hover:bg-emerald-50 rounded-full transition-all"
-            >
-              <span>📄</span> PDF Tools
-            </a>
+            {promoSites.map(site => (
+              <a
+                key={site.name}
+                href={site.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:flex items-center gap-1 px-2.5 py-1 text-[11px] font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-full transition-all"
+              >
+                <span>{site.emoji}</span> {site.name}
+              </a>
+            ))}
             <button
               onClick={goToPricing}
               className="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-semibold rounded-full hover:shadow-lg hover:shadow-emerald-200 transition-all hover:-translate-y-0.5"
@@ -112,14 +122,17 @@ export default function Header() {
                 className="w-full px-4 py-2.5 bg-slate-100 border border-slate-200 rounded-xl text-sm focus:bg-white focus:border-emerald-400 transition-all"
               />
             </form>
-            <a
-              href="https://tool-pdf-six.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-700 bg-slate-100 rounded-xl"
-            >
-              📄 Visit ToolPDF — Free PDF Tools
-            </a>
+            {promoSites.map(site => (
+              <a
+                key={site.name}
+                href={site.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-700 bg-slate-100 rounded-xl"
+              >
+                {site.emoji} {site.name}
+              </a>
+            ))}
             <button
               onClick={() => {
                 setIsMenuOpen(false);
