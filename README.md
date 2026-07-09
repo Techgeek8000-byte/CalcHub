@@ -1,15 +1,15 @@
-# ToolPDF — Free Online PDF Tools
+CalcHub — Free Online Calculators
 
-Merge, split, compress, rotate, watermark, and convert PDFs — all processed in your browser. Your files never leave your device.
+Every calculator you'll ever need — finance, health, math, and everyday. 100% free, fast, and private.
 
-🌐 **[tool-pdf-six.vercel.app](https://tool-pdf-six.vercel.app)**
+🌐 **[calc-hub-ashy.vercel.app](https://calc-hub-ashy.vercel.app)**
 
 ## Features
 
-- **12+ PDF tools** — Merge, Split, Compress, Rotate, Watermark, Protect, Unlock, PDF to Word, PDF to Images, Extract Pages, Remove Pages, Reorder Pages
-- **100% private** — Client-side processing with pdf-lib. No uploads, no servers
-- **Free tier** — 15 operations/day at no cost
+- **22+ calculators** — Loan EMI, Compound Interest, Tip Calculator, Mortgage Calculator, BMI, Calorie, Body Fat, Percentage, Age, GPA, Currency Converter, Fuel Cost, and more
+- **Amortization tables** — Full payment schedules for mortgage and loan calculators
+- **Instant results** — All calculations run in your browser
+- **Free tier** — 15 calculations/day
 - **Pro plans** — $1/week, $2/month, $12/year, or $25 lifetime
-- **Drag & drop** — Intuitive file upload with visual progress
-- **File size indicator** — See estimated compressed size before downloading
+- **Recently used** — Quick access to your most-used calculators
 ...
