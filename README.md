@@ -1,4 +1,4 @@
-CalcHub — Free Online Calculators
+# CalcHub — Free Online Calculators
 
 Every calculator you'll ever need — finance, health, math, and everyday. 100% free, fast, and private.
 
