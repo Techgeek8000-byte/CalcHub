@@ -1,9 +1,12 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
+import { toast } from "sonner";
 import { useCalcStore } from "@/lib/store";
 import { calcTools } from "@/lib/tool-definitions";
+import { incrementUsage as incrementGlobalUsage } from "@/lib/usage-counter";
 import { calculate, getCalcFields, UNIT_OPTIONS } from "@/lib/calculators";
+import SocialShare from "@/components/calc/SocialShare";
 import type { CalcField } from "@/lib/calculators";
 
 export default function CalcWorkspace() {
@@ -12,6 +15,7 @@ export default function CalcWorkspace() {
   const [results, setResults] = useState<Record<string, unknown> | string | null>(null);
   const [computed, setComputed] = useState(false);
   const [showLimitModal, setShowLimitModal] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const tool = calcTools.find((t) => t.id === activeTool);
 
@@ -58,11 +62,39 @@ export default function CalcWorkspace() {
       return;
     }
 
+    setIsProcessing(true);
     const res = calculate(activeTool, values);
-    setResults(res);
-    setComputed(true);
-    incrementUsage();
-    addToHistory(activeTool, { inputs: values, result: res });
+
+    // Simulate brief processing for skeleton visibility
+    setTimeout(() => {
+      setIsProcessing(false);
+      setResults(res);
+      setComputed(true);
+      incrementUsage();
+      addToHistory(activeTool, { inputs: values, result: res });
+      incrementGlobalUsage(activeTool);
+
+      if (typeof res === "string") {
+        toast.error(res, { duration: 4000 });
+      } else {
+        toast.success("Calculation complete!", {
+          description: `Results for ${tool?.name || activeTool}`,
+          duration: 3000,
+          action: {
+            label: "Copy",
+            onClick: () => {
+              const text = Object.entries(res)
+                .filter(([, v]) => typeof v === "string" || typeof v === "number")
+                .map(([k, v]) => `${formatLabel(k)}: ${formatValue(v)}`)
+                .join("\n");
+              navigator.clipboard.writeText(text).then(() => {
+                toast.success("Copied to clipboard!", { duration: 2000 });
+              }).catch(() => {});
+            },
+          },
+        });
+      }
+    }, 300);
   };
 
   const handleChange = (id: string, val: string) => {
@@ -179,7 +211,34 @@ export default function CalcWorkspace() {
 
         {/* Results Panel */}
         <div className="md:col-span-2 space-y-4">
-          {computed && results ? (
+          {isProcessing ? (
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 animate-pulse">
+              <div className="h-4 w-20 bg-slate-200 rounded" />
+              <div className="h-8 w-36 bg-slate-200 rounded" />
+              <div className="space-y-2 pt-2">
+                <div className="flex justify-between">
+                  <div className="h-3 w-16 bg-slate-100 rounded" />
+                  <div className="h-3 w-20 bg-slate-100 rounded" />
+                </div>
+                <div className="flex justify-between">
+                  <div className="h-3 w-20 bg-slate-100 rounded" />
+                  <div className="h-3 w-16 bg-slate-100 rounded" />
+                </div>
+                <div className="flex justify-between">
+                  <div className="h-3 w-14 bg-slate-100 rounded" />
+                  <div className="h-3 w-24 bg-slate-100 rounded" />
+                </div>
+              </div>
+              <div className="pt-3">
+                <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full"
+                    style={{ width: "75%" }}
+                  />
+                </div>
+              </div>
+            </div>
+          ) : computed && results ? (
             isResultError ? (
               <div className="bg-red-50 border border-red-200 rounded-2xl p-5">
                 <p className="text-red-600 text-sm font-medium">⚠️ {results}</p>
@@ -213,6 +272,7 @@ export default function CalcWorkspace() {
                       setValues({});
                       setResults(null);
                       setComputed(false);
+                      setIsProcessing(false);
                       useCalcStore.getState().setActiveTool(t.id);
                     }}
                     className="w-full flex items-center gap-3 p-2.5 rounded-lg hover:bg-slate-50 transition-colors text-left"
@@ -223,6 +283,14 @@ export default function CalcWorkspace() {
                 ))}
             </div>
           </div>
+
+          {/* Social Share */}
+          {computed && results && !isResultError && (
+            <SocialShare
+              url={typeof window !== "undefined" ? window.location.href : ""}
+              title={`${tool.name} — CalcHub`}
+            />
+          )}
         </div>
       </div>
 
@@ -285,7 +353,7 @@ function ResultDisplay({ data, toolId }: { data: Record<string, unknown>; toolId
       {filteredEntries.map(([key, value]) => {
         const label = formatLabel(key);
         const displayVal = formatValue(value);
-        const isMain = ["emi", "totalAmount", "totalTax", "tipAmount", "savings", "bmi", "tdee", "bodyFat", "dueDate", "result", "password", "convertedAmount", "gpa", "weightedAverage", "perPerson", "totalCost"].includes(key);
+        const isMain = ["emi", "totalAmount", "totalTax", "tipAmount", "savings", "bmi", "tdee", "bodyFat", "dueDate", "result", "password", "convertedAmount", "gpa", "weightedAverage", "perPerson", "totalCost", "monthlyPayment"].includes(key);
 
         return (
           <div key={key} className={isMain ? "mb-2" : ""}>

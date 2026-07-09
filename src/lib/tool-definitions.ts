@@ -13,6 +13,7 @@ export const calcTools: CalcTool[] = [
   { id: "compound-interest", name: "Compound Interest", description: "See how your money grows with compound interest over time", icon: "📈", category: "finance", gradient: "from-emerald-400 to-cyan-500" },
   { id: "salary-tax", name: "Salary Tax Calculator", description: "Calculate income tax on your monthly or annual salary", icon: "💰", category: "finance", gradient: "from-teal-500 to-emerald-600" },
   { id: "tip-calculator", name: "Tip Calculator", description: "Split bills and calculate tips for any group size", icon: "💵", category: "finance", gradient: "from-emerald-600 to-emerald-500" },
+  { id: "mortgage-calculator", name: "Mortgage Calculator", description: "Calculate monthly mortgage payments, total interest, and amortization schedule", icon: "🏠", category: "finance", gradient: "from-teal-500 to-cyan-500" },
   { id: "discount", name: "Discount Calculator", description: "Calculate sale prices, savings, and final amounts after discount", icon: "🏷️", category: "finance", gradient: "from-teal-400 to-emerald-500" },
   { id: "profit-margin", name: "Profit Margin", description: "Calculate profit margin, markup, and gross profit from cost and revenue", icon: "📊", category: "finance", gradient: "from-cyan-500 to-teal-500" },
   // Health

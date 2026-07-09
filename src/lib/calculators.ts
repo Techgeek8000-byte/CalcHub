@@ -147,6 +147,13 @@ const FIELD_DEFS: Record<string, CalcField[]> = {
     { id: "people", label: "Number of People", type: "number", placeholder: "1", min: 1 },
   ],
 
+  "mortgage-calculator": [
+    { id: "loanAmount", label: "Loan Amount", type: "number", placeholder: "e.g. 5000000", min: 1000 },
+    { id: "interestRate", label: "Annual Interest Rate (%)", type: "number", placeholder: "e.g. 7.5", min: 0.1, step: 0.1 },
+    { id: "loanTerm", label: "Loan Term (years)", type: "number", placeholder: "e.g. 30", min: 1 },
+    { id: "downPayment", label: "Down Payment (optional)", type: "number", placeholder: "e.g. 1000000", min: 0 },
+  ],
+
   discount: [
     { id: "originalPrice", label: "Original Price", type: "number", placeholder: "e.g. 5000", min: 0.01 },
     { id: "discountPercentage", label: "Discount (%)", type: "number", placeholder: "e.g. 20", min: 0, max: 100, step: 1 },
@@ -395,6 +402,8 @@ export function calculate(
       return calcSalaryTax(values);
     case "tip-calculator":
       return calcTip(values);
+    case "mortgage-calculator":
+      return calcMortgage(values);
     case "discount":
       return calcDiscount(values);
     case "profit-margin":
@@ -557,6 +566,58 @@ function calcTip(v: Record<string, string | number>) {
     tipAmount: tipAmount.toFixed(2),
     totalAmount: totalAmount.toFixed(2),
     perPerson: perPerson.toFixed(2),
+  };
+}
+
+function calcMortgage(v: Record<string, string | number>) {
+  const loanAmount = num(v.loanAmount);
+  const annualRate = num(v.interestRate);
+  const termYears = num(v.loanTerm);
+  const downPayment = num(v.downPayment, 0);
+
+  if (loanAmount <= 0) return "Please enter a valid loan amount.";
+  if (annualRate <= 0) return "Please enter a valid interest rate.";
+  if (termYears <= 0) return "Please enter a valid loan term.";
+
+  const principal = Math.max(0, loanAmount - downPayment);
+  const monthlyRate = annualRate / 100 / 12;
+  const totalMonths = termYears * 12;
+
+  if (principal === 0) return "Down payment cannot equal or exceed the loan amount.";
+
+  const factor = Math.pow(1 + monthlyRate, totalMonths);
+  const monthlyPayment = (principal * monthlyRate * factor) / (factor - 1);
+  const totalPayment = monthlyPayment * totalMonths;
+  const totalInterest = totalPayment - principal;
+
+  // Amortization schedule (first 12 months)
+  const amortization: { month: number; payment: string; principal: string; interest: string; balance: string }[] = [];
+  let balance = principal;
+  const monthsToShow = Math.min(12, totalMonths);
+  for (let i = 1; i <= monthsToShow; i++) {
+    const interestPart = balance * monthlyRate;
+    const principalPart = monthlyPayment - interestPart;
+    balance -= principalPart;
+    if (balance < 0) balance = 0;
+    amortization.push({
+      month: i,
+      payment: monthlyPayment.toFixed(2),
+      principal: principalPart.toFixed(2),
+      interest: interestPart.toFixed(2),
+      balance: balance.toFixed(2),
+    });
+  }
+
+  const paymentToIncome = loanAmount > 0 ? (monthlyPayment * 12) / loanAmount * 100 : 0;
+
+  return {
+    monthlyPayment: monthlyPayment.toFixed(2),
+    totalPayment: totalPayment.toFixed(2),
+    totalInterest: totalInterest.toFixed(2),
+    principalAmount: principal.toFixed(2),
+    downPaymentAmount: downPayment.toFixed(2),
+    amortization,
+    monthlyBreakdown: amortization,
   };
 }
 

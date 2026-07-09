@@ -1,6 +1,15 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { getTotalUsage } from "@/lib/usage-counter";
+
 export default function HeroSection() {
+  const [totalCalcs, setTotalCalcs] = useState(0);
+
+  useEffect(() => {
+    setTotalCalcs(getTotalUsage());
+  }, []);
+
   return (
     <section className="relative overflow-hidden">
       {/* Background decorations */}
@@ -72,7 +81,7 @@ export default function HeroSection() {
         {/* Stats */}
         <div className="grid grid-cols-3 gap-6 max-w-md mx-auto mt-12">
           <div>
-            <p className="text-3xl font-extrabold text-emerald-600">20+</p>
+            <p className="text-3xl font-extrabold text-emerald-600">22+</p>
             <p className="text-xs text-slate-400 mt-1">Calculators</p>
           </div>
           <div>
@@ -80,8 +89,12 @@ export default function HeroSection() {
             <p className="text-xs text-slate-400 mt-1">Categories</p>
           </div>
           <div>
-            <p className="text-3xl font-extrabold text-orange-500">0s</p>
-            <p className="text-xs text-slate-400 mt-1">Load Time</p>
+            <p className="text-3xl font-extrabold text-orange-500">
+              {totalCalcs > 0 ? totalCalcs.toLocaleString() : "0s"}
+            </p>
+            <p className="text-xs text-slate-400 mt-1">
+              {totalCalcs > 0 ? "Total Calculations" : "Load Time"}
+            </p>
           </div>
         </div>
       </div>

@@ -25,6 +25,11 @@ export const calcMetaMap: Record<string, CalcMeta> = {
     description: 'Calculate tips and split bills among any group size. Fast, free, and easy to use tip calculator for restaurants and groups.',
     keywords: ['tip calculator', 'bill splitter', 'gratuity calculator', 'restaurant tip', 'group bill calculator'],
   },
+  'mortgage-calculator': {
+    title: 'Mortgage Calculator — Free Monthly Payment & Amortization | CalcHub',
+    description: 'Calculate monthly mortgage payments, total interest, and view your amortization schedule. Free online mortgage calculator with down payment support.',
+    keywords: ['mortgage calculator', 'home loan calculator', 'mortgage payment', 'amortization schedule', 'monthly mortgage payment', 'housing loan EMI'],
+  },
   'discount': {
     title: 'Discount Calculator — Calculate Sale Price & Savings | CalcHub',
     description: 'Calculate discounted prices, percentage savings, and final amounts instantly. Free online discount calculator for shoppers.',
