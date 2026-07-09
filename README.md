@@ -1,9 +1,3 @@
-Input:
-{
-  "path": "C:\\Users\\pc\\.openclaw-autoclaw\\workspace\\.cluster\\toolpdf\\README.md"
-}
-
-Output:
 # ToolPDF — Free Online PDF Tools
 
 Merge, split, compress, rotate, watermark, and convert PDFs — all processed in your browser. Your files never leave your device.
